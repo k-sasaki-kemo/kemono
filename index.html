@@ -36,12 +36,13 @@
   }
   .nav-links {
     display: flex;
-    gap: 2.5rem;
+    gap: 1.5rem;
     list-style: none;
+    align-items: center;
     opacity: 0;
     animation: fadeDown 1s cubic-bezier(0.16,1,0.3,1) forwards 0.5s;
   }
-  .nav-links a {
+  .nav-link {
     font-size: 0.75rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -50,7 +51,7 @@
     cursor: none;
     position: relative;
   }
-  .nav-links a::after {
+  .nav-link::after {
     content: '';
     position: absolute;
     bottom: -2px; left: 0;
@@ -58,7 +59,19 @@
     background: #111;
     transition: width 0.4s cubic-bezier(0.16,1,0.3,1);
   }
-  .nav-links a:hover::after { width: 100%; }
+  .nav-link:hover::after { width: 100%; }
+  .contact-btn {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #111;
+    text-decoration: none;
+    cursor: none;
+    border: 1px solid #111;
+    padding: 0.55rem 1.2rem;
+    transition: background 0.3s cubic-bezier(0.16,1,0.3,1), color 0.3s;
+  }
+  .contact-btn:hover { background: #111; color: #fff; }
 
   .page {
     min-height: 100vh;
@@ -94,23 +107,117 @@
   }
   .line-pair.visible { opacity: 1; transform: translateY(0); }
 
-  /* CONTACT */
-  .contact-title {
+  /* PAGE TITLES */
+  .page-title {
     font-size: clamp(1.8rem, 4vw, 2.8rem);
     font-weight: 700;
     letter-spacing: -0.03em;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     overflow: hidden;
     color: #111;
   }
-  .contact-title-inner {
+  .page-title-inner {
     display: block;
     transform: translateY(110%);
   }
-  .contact-title-inner.animate {
+  .page-title-inner.animate {
     animation: slideUp 1.1s cubic-bezier(0.16,1,0.3,1) forwards;
   }
 
+  /* ABOUT */
+  .about-section {
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+  }
+  .about-section.visible { opacity: 1; transform: translateY(0); }
+  .about-section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #111;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.5px solid #111;
+  }
+  .about-table { width: 100%; border-collapse: collapse; }
+  .about-table tr { border-bottom: 0.5px solid #e8e8e8; }
+  .about-table td {
+    padding: 1rem 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    vertical-align: top;
+    color: #111;
+  }
+  .about-table td:first-child {
+    color: #999;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    width: 140px;
+    padding-top: 1.1rem;
+  }
+
+  /* CEO */
+  .ceo-wrap {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 600px) {
+    .ceo-wrap { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  .ceo-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    filter: grayscale(100%);
+  }
+  .ceo-info { display: flex; flex-direction: column; gap: 0.4rem; }
+  .ceo-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #111;
+  }
+  .ceo-name-en {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: #999;
+    text-transform: uppercase;
+  }
+  .ceo-role {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #111;
+    margin-top: 0.4rem;
+    margin-bottom: 1.2rem;
+  }
+  .ceo-bio {
+    font-size: 0.88rem;
+    line-height: 2;
+    color: #111;
+    padding-top: 1.2rem;
+    border-top: 0.5px solid #e8e8e8;
+  }
+  .ceo-tagline {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: #111;
+    margin-bottom: 1rem;
+  }
+  .ceo-awards {
+    font-size: 0.78rem;
+    line-height: 1.9;
+    color: #999;
+    margin-top: 1rem;
+  }
+
+  /* CONTACT */
   .form-wrap {
     display: flex;
     flex-direction: column;
@@ -143,13 +250,9 @@
     background: transparent;
     outline: none;
     cursor: none;
-    transition: border-color 0.3s;
     resize: none;
   }
-  .form-field input::placeholder,
-  .form-field textarea::placeholder { color: #bbb; }
   .form-field textarea { min-height: 120px; line-height: 1.8; }
-
   .submit-btn {
     align-self: flex-start;
     padding: 0.85rem 2.5rem;
@@ -163,11 +266,10 @@
     cursor: none;
     opacity: 0;
     transform: translateY(14px);
-    transition: background 0.35s cubic-bezier(0.16,1,0.3,1), color 0.35s, opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    transition: background 0.35s, color 0.35s, opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
   }
   .submit-btn.visible { opacity: 1; transform: translateY(0); }
   .submit-btn:hover { background: #111; color: #fff; }
-
   .form-success {
     display: none;
     font-size: 1rem;
@@ -195,13 +297,11 @@
     from { transform: translateY(110%); }
     to   { transform: translateY(0); }
   }
-
   .paw {
     position: fixed;
     pointer-events: none;
     z-index: 9999;
-    width: 26px;
-    height: 26px;
+    width: 26px; height: 26px;
     opacity: 0;
     animation: pawFade 1.4s cubic-bezier(0.16,1,0.3,1) forwards;
   }
@@ -217,7 +317,8 @@
 <nav>
   <span class="logo" onclick="showPage('home')">Kemono Inc.</span>
   <ul class="nav-links">
-    <li><a href="#" onclick="showPage('contact');return false;">Contact</a></li>
+    <li><a class="nav-link" href="#" onclick="showPage('about');return false;">About</a></li>
+    <li><a class="contact-btn" href="#" onclick="showPage('contact');return false;">Contact</a></li>
   </ul>
 </nav>
 
@@ -233,13 +334,64 @@
       <div class="line-pair">迷ったらこの世界が良くなる方へ。</div>
     </div>
   </main>
-  <footer>© 2025 Kemono Inc.</footer>
+  <footer>© 2026 Kemono Inc.</footer>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="page-about">
+  <main>
+    <h2 class="page-title"><span class="page-title-inner" id="about-title-inner">About</span></h2>
+
+    <div class="about-section">
+      <div class="about-section-label">Company</div>
+      <table class="about-table">
+        <tr>
+          <td>会社名</td>
+          <td>株式会社けもの<br><span style="font-size:0.8rem;color:#999;letter-spacing:0.08em;">Kemono Inc.</span></td>
+        </tr>
+        <tr>
+          <td>設立</td>
+          <td>2026年1月</td>
+        </tr>
+        <tr>
+          <td>資本金</td>
+          <td>100万円</td>
+        </tr>
+        <tr>
+          <td>所在地</td>
+          <td>〒164-0001<br>東京都中野区中野3-19-10 104</td>
+        </tr>
+        <tr>
+          <td>事業内容</td>
+          <td>マーケティング支援及びクリエイティブディレクション</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="about-section">
+      <div class="about-section-label">Representative</div>
+      <div class="ceo-wrap">
+        <img class="ceo-photo" src="5829_mono.jpg" alt="佐々木剛哉" />
+        <div class="ceo-info">
+          <div class="ceo-name">佐々木剛哉</div>
+          <div class="ceo-name-en">Kouya Sasaki</div>
+          <div class="ceo-role">代表取締役 / CEO · Creative Director</div>
+          <div class="ceo-bio">
+            <div class="ceo-tagline">動物が好きすぎて、会社名を「けもの」にしました。</div>
+            プランナー／クリエイティブディレクター。プロダクション、クリエイティブエージェンシー、総合広告代理店での経験を背景に、ものづくりから統合コミュニケーション設計、新規事業開発までを一貫して担当。デジタルを軸に、オンライン／オフラインを横断したコミュニケーション設計を強みとする。
+            <div class="ceo-awards">テクニカルディレクター協会所属。上級ウェブ解析士、食品衛生責任者。<br>ADFEST、釜山国際広告賞、BOVA、販促コンペ、講談社メディアアワード等を受賞。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>© 2026 Kemono Inc.</footer>
 </div>
 
 <!-- CONTACT -->
 <div class="page" id="page-contact">
   <main>
-    <h2 class="contact-title"><span class="contact-title-inner">Contact</span></h2>
+    <h2 class="page-title"><span class="page-title-inner" id="contact-title-inner">Contact</span></h2>
     <div class="form-wrap" id="form-wrap">
       <div class="form-field">
         <label class="form-label">件名</label>
@@ -255,15 +407,26 @@
       ありがとうございます。<br>メッセージを受け取りました。
     </div>
   </main>
-  <footer>© 2025 Kemono Inc.</footer>
+  <footer>© 2026 Kemono Inc.</footer>
 </div>
 
 <script>
   function showPage(name) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + name).classList.add('active');
+
+    if (name === 'about') {
+      const title = document.getElementById('about-title-inner');
+      title.classList.remove('animate');
+      void title.offsetWidth;
+      title.classList.add('animate');
+      document.querySelectorAll('#page-about .about-section').forEach((el, i) => {
+        el.classList.remove('visible');
+        setTimeout(() => el.classList.add('visible'), 300 + i * 220);
+      });
+    }
     if (name === 'contact') {
-      const title = document.querySelector('.contact-title-inner');
+      const title = document.getElementById('contact-title-inner');
       title.classList.remove('animate');
       void title.offsetWidth;
       title.classList.add('animate');
