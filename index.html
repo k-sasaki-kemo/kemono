@@ -3,7 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kemono Inc.</title>
+<title>株式会社けもの</title>
+
+<!-- ファビコン（画像準備後に差し替え） -->
+<!-- <link rel="icon" type="image/png" href="favicon.png"> -->
+
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="株式会社けもの">
+<meta property="og:description" content="本能と直感で動物的に。非論理型コミュニケーションエージェンシー。AI時代に逆行する、人らしく、動物らしく、働く。">
+<meta property="og:url" content="https://kemono.co.jp">
+<meta property="og:site_name" content="株式会社けもの">
+<!-- OGP画像（準備後に追加） -->
+<!-- <meta property="og:image" content="https://kemono.co.jp/ogp.jpg"> -->
+<!-- <meta property="og:image:width" content="1200"> -->
+<!-- <meta property="og:image:height" content="630"> -->
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="株式会社けもの">
+<meta name="twitter:description" content="本能と直感で動物的に。非論理型コミュニケーションエージェンシー。AI時代に逆行する、人らしく、動物らしく、働く。">
+<!-- <meta name="twitter:image" content="https://kemono.co.jp/ogp.jpg"> -->
+
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
   body {
@@ -93,30 +114,19 @@
     margin-bottom: 3rem;
     color: #111;
     opacity: 0;
-    
     transform: translateY(16px);
     transition: opacity 1.4s cubic-bezier(0.16,1,0.3,1), transform 1.4s cubic-bezier(0.16,1,0.3,1);
   }
-  .tagline.visible {
-    opacity: 1;
-    
-    transform: translateY(0);
-  }
-
+  .tagline.visible { opacity: 1; transform: translateY(0); }
   .line-pair {
     opacity: 0;
-    
     transform: translateY(14px);
     transition: opacity 1.6s cubic-bezier(0.16,1,0.3,1), transform 1.6s cubic-bezier(0.16,1,0.3,1);
     font-size: clamp(0.85rem, 3.5vw, 1rem);
     line-height: 2.1;
     color: #111;
   }
-  .line-pair.visible {
-    opacity: 1;
-    
-    transform: translateY(0);
-  }
+  .line-pair.visible { opacity: 1; transform: translateY(0); }
 
   /* PAGE TITLES */
   .page-title {
@@ -133,6 +143,44 @@
   }
   .page-title-inner.animate {
     animation: slideUp 1.1s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+
+  /* NEWS */
+  .news-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .news-item {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 0.5px solid #e8e8e8;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+  }
+  @media (max-width: 500px) {
+    .news-item { grid-template-columns: 1fr; gap: 0.4rem; }
+  }
+  .news-item.visible { opacity: 1; transform: translateY(0); }
+  .news-date {
+    font-size: 0.75rem;
+    color: #999;
+    letter-spacing: 0.04em;
+    padding-top: 0.15rem;
+    white-space: nowrap;
+  }
+  .news-title {
+    font-size: clamp(0.88rem, 3.3vw, 0.95rem);
+    line-height: 1.8;
+    color: #111;
+  }
+  .news-body {
+    font-size: clamp(0.8rem, 3vw, 0.85rem);
+    line-height: 1.9;
+    color: #555;
+    margin-top: 0.4rem;
   }
 
   /* ABOUT */
@@ -168,8 +216,6 @@
     width: 100px;
     padding-top: 1rem;
   }
-
-  /* CEO */
   .ceo-wrap {
     display: grid;
     grid-template-columns: 160px 1fr;
@@ -180,14 +226,7 @@
     .ceo-wrap { grid-template-columns: 1fr; gap: 1.5rem; }
     .ceo-photo { max-width: 140px; }
   }
-  .ceo-photo {
-    width: 100%;
-    aspect-ratio: 3/4;
-    object-fit: cover;
-    object-position: top;
-    display: block;
-    filter: grayscale(100%);
-  }
+  .ceo-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; display: block; filter: grayscale(100%); }
   .ceo-info { display: flex; flex-direction: column; gap: 0.3rem; }
   .ceo-name { font-size: clamp(1.1rem, 5vw, 1.4rem); font-weight: 700; letter-spacing: -0.01em; color: #111; }
   .ceo-name-en { font-size: clamp(0.7rem, 2.8vw, 0.8rem); letter-spacing: 0.1em; color: #999; text-transform: uppercase; }
@@ -203,25 +242,11 @@
     transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
   }
   .work-body.visible { opacity: 1; transform: translateY(0); }
-  .work-lead {
-    font-size: clamp(1.4rem, 6vw, 2.4rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.3;
-    color: #111;
-    margin-bottom: 1.2rem;
-  }
-  .work-sub {
-    font-size: clamp(0.82rem, 3.2vw, 0.95rem);
-    line-height: 2;
-    color: #111;
-    margin-bottom: 2.5rem;
-    max-width: 480px;
-  }
+  .work-lead { font-size: clamp(1.4rem, 6vw, 2.4rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.3; color: #111; margin-bottom: 1.2rem; }
+  .work-sub { font-size: clamp(0.82rem, 3.2vw, 0.95rem); line-height: 2; color: #111; margin-bottom: 2.5rem; max-width: 480px; }
 
   /* FORMS */
-  .form-wrap,
-  .work-form-wrap {
+  .form-wrap, .work-form-wrap {
     display: flex;
     flex-direction: column;
     gap: 1.8rem;
@@ -233,65 +258,32 @@
     transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
   }
   .form-field.visible { opacity: 1; transform: translateY(0); }
-  .form-label {
-    display: block;
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #111;
-    margin-bottom: 0.6rem;
-  }
-  .form-field input,
-  .form-field textarea {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #111;
-    padding: 0.5rem 0;
-    font-size: clamp(0.9rem, 3.5vw, 1rem);
-    font-family: inherit;
-    color: #111;
-    background: transparent;
-    outline: none;
-    cursor: none;
-    resize: none;
-    -webkit-appearance: none;
+  .form-label { display: block; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #111; margin-bottom: 0.6rem; }
+  .form-field input, .form-field textarea {
+    width: 100%; border: none; border-bottom: 1px solid #111;
+    padding: 0.5rem 0; font-size: clamp(0.9rem, 3.5vw, 1rem);
+    font-family: inherit; color: #111; background: transparent;
+    outline: none; cursor: none; resize: none; -webkit-appearance: none;
   }
   .form-field textarea { min-height: 100px; line-height: 1.8; }
   .submit-btn {
-    align-self: flex-start;
-    padding: 0.8rem 2.2rem;
-    border: 1px solid #111;
-    background: transparent;
-    font-size: 0.72rem;
-    font-family: inherit;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #111;
-    cursor: none;
-    opacity: 0;
-    transform: translateY(14px);
+    align-self: flex-start; padding: 0.8rem 2.2rem;
+    border: 1px solid #111; background: transparent;
+    font-size: 0.72rem; font-family: inherit; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #111; cursor: none;
+    opacity: 0; transform: translateY(14px);
     transition: background 0.35s, color 0.35s, opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
   }
   .submit-btn.visible { opacity: 1; transform: translateY(0); }
   .submit-btn:hover { background: #111; color: #fff; }
   .form-success {
-    display: none;
-    font-size: clamp(0.9rem, 3.5vw, 1rem);
-    color: #111;
-    line-height: 2;
-    opacity: 0;
-    transform: translateY(10px);
+    display: none; font-size: clamp(0.9rem, 3.5vw, 1rem); color: #111; line-height: 2;
+    opacity: 0; transform: translateY(10px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
   .form-success.visible { opacity: 1; transform: translateY(0); }
 
-  footer {
-    padding: 1.5rem;
-    font-size: 0.65rem;
-    color: #111;
-    letter-spacing: 0.06em;
-    margin-top: auto;
-  }
+  footer { padding: 1.5rem; font-size: 0.65rem; color: #111; letter-spacing: 0.06em; margin-top: auto; }
 
   @keyframes fadeDown {
     from { opacity: 0; transform: translateY(-8px); }
@@ -302,11 +294,8 @@
     to   { transform: translateY(0); }
   }
   .paw {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    width: 26px; height: 26px;
-    opacity: 0;
+    position: fixed; pointer-events: none; z-index: 9999;
+    width: 26px; height: 26px; opacity: 0;
     animation: pawFade 1.4s cubic-bezier(0.16,1,0.3,1) forwards;
   }
   @keyframes pawFade {
@@ -332,6 +321,7 @@
 <nav>
   <span class="logo" onclick="showPage('home')">Kemono Inc.</span>
   <ul class="nav-links">
+    <li><a class="nav-link" href="#" onclick="showPage('news');return false;">News</a></li>
     <li><a class="nav-link" href="#" onclick="showPage('works');return false;">Works</a></li>
     <li><a class="nav-link" href="#" onclick="showPage('about');return false;">About</a></li>
     <li><a class="contact-btn" href="#" onclick="showPage('contact');return false;">Contact</a></li>
@@ -348,6 +338,26 @@
       <div class="line-pair">ゴールを見つけ出す。あなたを導く。<br>クリエイティブの力で、</div>
       <div class="line-pair">新たなビジネスを切り開いていく。<br>人らしく、動物らしく、本能全開で。</div>
       <div class="line-pair">迷ったらこの世界が良くなる方へ。</div>
+    </div>
+  </main>
+  <footer>© 2026 Kemono Inc.</footer>
+</div>
+
+<!-- NEWS -->
+<div class="page" id="page-news">
+  <main>
+    <h2 class="page-title"><span class="page-title-inner" id="news-title-inner">News</span></h2>
+    <div class="news-list" id="news-list">
+
+      <!-- ニュースはここに追加していく -->
+      <div class="news-item">
+        <div class="news-date">2026.01.30</div>
+        <div>
+          <div class="news-title">株式会社けもの 設立</div>
+          <div class="news-body">マーケティング支援及びクリエイティブディレクションを事業とする株式会社けものを設立いたしました。</div>
+        </div>
+      </div>
+
     </div>
   </main>
   <footer>© 2026 Kemono Inc.</footer>
@@ -465,14 +475,11 @@
     tagline.classList.remove('visible');
     void tagline.offsetWidth;
     setTimeout(() => tagline.classList.add('visible'), 300);
-
-    const pairs = document.querySelectorAll('#page-home .line-pair');
-    pairs.forEach((el, i) => {
+    document.querySelectorAll('#page-home .line-pair').forEach((el, i) => {
       el.classList.remove('visible');
       setTimeout(() => el.classList.add('visible'), 900 + i * 500);
     });
   }
-
   triggerHomeAnim();
 
   function showPage(name) {
@@ -481,6 +488,16 @@
 
     if (name === 'home') triggerHomeAnim();
 
+    if (name === 'news') {
+      const title = document.getElementById('news-title-inner');
+      title.classList.remove('animate');
+      void title.offsetWidth;
+      title.classList.add('animate');
+      document.querySelectorAll('#news-list .news-item').forEach((el, i) => {
+        el.classList.remove('visible');
+        setTimeout(() => el.classList.add('visible'), 300 + i * 150);
+      });
+    }
     if (name === 'works') {
       const title = document.getElementById('works-title-inner');
       title.classList.remove('animate');
