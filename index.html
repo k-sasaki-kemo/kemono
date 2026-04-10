@@ -141,11 +141,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .menu-toggle { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: #111; text-decoration: none; cursor: none; position: relative; z-index: 1002; }
   .menu-toggle::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: #111; transition: width 0.4s cubic-bezier(0.16,1,0.3,1); }
   .menu-toggle:hover::after { width: 100%; }
-  .menu-overlay { position: fixed; inset: 0; background: rgba(255,255,255,0.98); display: flex; align-items: flex-start; justify-content: flex-start; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.35s ease, visibility 0.35s ease; z-index: 1001; overflow-y: auto; }
+  .menu-overlay { position: fixed; inset: 0; background: rgba(255,255,255,0.98); display: flex; align-items: center; justify-content: flex-start; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.35s ease, visibility 0.35s ease; z-index: 999; }
   .menu-overlay.active { opacity: 1; visibility: visible; pointer-events: auto; }
-  .menu-panel { width: 100%; padding: 4.5rem 1.5rem 3rem; }
-  .menu-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
-  .menu-list a { display: inline-block; font-size: clamp(1.6rem, 8vw, 2.4rem); font-weight: 700; letter-spacing: -0.03em; color: #111; text-decoration: none; line-height: 1.2; }
+  .menu-panel { width: 100%; padding: 4rem 1.5rem 0; }
+  .menu-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .menu-list a { display: inline-block; font-size: clamp(1.8rem, 9vw, 2.6rem); font-weight: 700; letter-spacing: -0.03em; color: #111; text-decoration: none; line-height: 1.15; }
 
   .page { min-height: 100vh; display: none; flex-direction: column; justify-content: center; padding: 7rem 1.5rem 3rem; max-width: 820px; width: 100%; }
   .page.active { display: flex; }
@@ -339,20 +339,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li><a class="contact-btn" href="#contact" onclick="showPage('contact');closeMenu();return false;" aria-label="お問い合わせ">Contact</a></li>
     </ul>
   </nav>
-</header>
 
-<div class="menu-overlay" id="menu-overlay" aria-hidden="true" role="dialog" aria-label="モバイルメニュー">
-  <div class="menu-panel">
-    <nav aria-label="モバイルナビゲーション">
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true" role="dialog" aria-label="モバイルメニュー">
+    <div class="menu-panel">
       <ul class="menu-list">
         <li><a href="#works" onclick="navigateFromMenu('works');return false;">Works</a></li>
         <li><a href="#member" onclick="navigateFromMenu('member');return false;">Member</a></li>
         <li><a href="#news" onclick="navigateFromMenu('news');return false;">News</a></li>
         <li><a href="#about" onclick="navigateFromMenu('about');return false;">About</a></li>
       </ul>
-    </nav>
+    </div>
   </div>
-</div>
+</header>
 
 <!-- HOME -->
 <main id="page-home" class="page active" role="main" aria-label="ホーム">
