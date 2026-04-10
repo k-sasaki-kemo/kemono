@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -460,6 +459,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="member-card-name">遠水イッカン</div>
         <div class="member-card-name-en">Ikkan Tomizu</div>
       </div>
+      <div class="member-card" onclick="showMemberDetail('kamioka')">
+        <div class="member-card-photo-wrap"><img class="member-card-photo" src="kamioka.jpg" alt="上岡伸輔" /></div>
+        <div class="member-card-role-ja">フォトグラファー</div>
+        <div class="member-card-role-en">Photographer</div>
+        <div class="member-card-name">上岡伸輔</div>
+        <div class="member-card-name-en">Shinsuke Kamioka</div>
+      </div>
     </div>
   </main>
   <footer>© 2026 Kemono Inc.</footer>
@@ -533,6 +539,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       biography: '1991年8月30日生まれ。石川県金沢市出身。立命館大学卒。2014年より株式会社ケセラセラに入社。セールス、プランニング、ディレクション、そのすべてを担う視点から、当事者の見る景色や独自の感覚をすくい上げ、その、もう一歩先へと踏み出すようなデザインをつくる。担当領域はブランディングや経営戦略、プロモーション企画を主軸とし、DTPやWEBから動画制作まで、多岐にわたるクリエイティブディレクションを行う。',
       sns: { instagram: 'https://www.instagram.com/ikkaaannnn__/', note: 'https://note.com/ikkaaannnn' },
     },
+    kamioka: {
+      photo: 'kamioka.jpg',
+      nameJa: '上岡伸輔', nameEn: 'Shinsuke Kamioka',
+      roleJa: 'フォトグラファー', roleEn: 'Photographer',
+      intro: '',
+      biography: '上智大学卒業。デザイン会社撮影部を経て、独立。広告、雑誌、ファッションカタログ、CDジャケットなどを中心に活動。世界50カ国以上を訪れ、海外での撮影も多数ある。国連とUniqloの共同プロジェクトでは、ヨルダン、ウガンダ、キリギスなどの難民キャンプでの撮影を行うなど幅広い活動をしている。',
+    },
   };
 
   /* =========================================================
@@ -604,7 +617,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const w = works[key];
     if (!w) return;
 
-    // ギャラリー: 1枚目フル幅、残りは2列グリッド
     const galleryImgs = w.gallery.map((src, i) =>
       `<img src="${src}" alt="${w.title} ${i+1}" ${i === 0 ? 'class="full"' : ''} loading="lazy" />`
     ).join('');
@@ -652,6 +664,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (links.length) snsHtml = `<div class="member-detail-sns">${links.join('')}</div>`;
     }
     const awardsHtml = m.awards ? `<div class="member-detail-bio-awards">${m.awards.replace(/\n/g, '<br>')}</div>` : '';
+    const introSection = m.intro ? `
+      <div class="member-detail-section" id="md-intro">
+        <div class="member-detail-section-label">Introduction</div>
+        <div class="member-detail-intro">${m.intro}</div>
+      </div>` : '';
     let worksHtml = '';
     if (m.works && m.works.length) {
       worksHtml = `<div class="member-detail-section" id="md-works"><div class="member-detail-section-label">Works</div><div class="member-detail-bio">${m.works.join('<br>')}</div></div>`;
@@ -668,10 +685,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           ${snsHtml}
         </div>
       </div>
-      <div class="member-detail-section" id="md-intro">
-        <div class="member-detail-section-label">Introduction</div>
-        <div class="member-detail-intro">${m.intro}</div>
-      </div>
+      ${introSection}
       <div class="member-detail-section" id="md-bio">
         <div class="member-detail-section-label">Biography</div>
         <div class="member-detail-bio">${m.biography}${awardsHtml}</div>
