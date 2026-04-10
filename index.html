@@ -114,35 +114,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .work-sub { font-size: clamp(0.82rem, 3.2vw, 0.95rem); line-height: 2; color: #111; margin-bottom: 2.5rem; max-width: 480px; }
 
   /* WORKS LIST */
-  .works-divider {
-    width: 100%;
-    height: 0.5px;
-    background: #e8e8e8;
-    margin: 2.5rem 0;
-    opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1);
-  }
+  .works-divider { width: 100%; height: 0.5px; background: #e8e8e8; margin: 2.5rem 0; opacity: 0; transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1); }
   .works-divider.visible { opacity: 1; }
   .works-list { display: flex; flex-direction: column; gap: 0; }
-  .work-item {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 2rem;
-    padding: 2rem 0;
-    border-bottom: 0.5px solid #e8e8e8;
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
-    cursor: none;
-  }
+  .work-item { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 0.5px solid #e8e8e8; opacity: 0; transform: translateY(14px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); cursor: none; }
   @media (max-width: 560px) { .work-item { grid-template-columns: 1fr; gap: 1rem; } }
   .work-item.visible { opacity: 1; transform: translateY(0); }
   .work-item-photo-wrap { overflow: hidden; aspect-ratio: 16/10; }
-  .work-item-photo {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
-    filter: grayscale(8%);
-  }
+  .work-item-photo { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); filter: grayscale(8%); }
   .work-item:hover .work-item-photo { transform: scale(1.04); }
   .work-item-meta { display: flex; flex-direction: column; justify-content: center; gap: 0.5rem; }
   .work-item-client { font-size: 0.65rem; letter-spacing: 0.1em; color: #999; }
@@ -231,6 +210,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .member-detail-bio { font-size: clamp(0.82rem, 3.2vw, 0.92rem); line-height: 2.1; color: #111; }
   .member-detail-bio-awards { font-size: clamp(0.75rem, 2.8vw, 0.82rem); line-height: 2; color: #999; margin-top: 1rem; }
   .member-detail-intro { font-size: clamp(0.85rem, 3.3vw, 0.95rem); line-height: 2.2; color: #111; }
+
+  /* AWARD LIST */
+  .award-list { list-style: none; display: flex; flex-direction: column; }
+  .award-item { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; padding: 0.75rem 0; border-bottom: 0.5px solid #e8e8e8; align-items: baseline; }
+  .award-item:first-child { border-top: 0.5px solid #e8e8e8; }
+  .award-name { font-size: clamp(0.78rem, 3vw, 0.88rem); color: #111; line-height: 1.6; }
+  .award-prize { font-size: 0.7rem; letter-spacing: 0.04em; color: #999; text-align: right; line-height: 1.5; white-space: nowrap; }
+  @media (max-width: 500px) { .award-item { grid-template-columns: 1fr; gap: 0.2rem; } .award-prize { text-align: left; } }
 
   footer { padding: 1.5rem; font-size: 0.65rem; color: #111; letter-spacing: 0.06em; margin-top: auto; }
 
@@ -414,7 +401,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="ceo-bio">
             <div class="ceo-tagline">動物が好きすぎて、会社名を「けもの」にしました。</div>
             武蔵野美術大学卒業。最終学歴吉本NSC中退。プロダクション、クリエイティブエージェンシー、総合広告代理店での経験を背景に、ものづくりから統合コミュニケーション設計、新規事業開発までを一貫して担当。デジタルを軸に、オンライン／オフラインを横断したコミュニケーション設計を強みとする。
-            <div class="ceo-awards">テクニカルディレクター協会所属。上級ウェブ解析士、食品衛生責任者。ゾウ使い免許保持。<br>ADFEST、釜山国際広告賞、BOVA、販促コンペ、講談社メディアアワード等を受賞。</div>
+            <div class="ceo-awards">上級ウェブ解析士、食品衛生責任者。ゾウ使い免許保持。<br>ADFEST、釜山国際広告賞、BOVA、販促コンペ、講談社メディアアワード等を受賞。</div>
           </div>
         </div>
       </div>
@@ -466,6 +453,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="member-card-name">上岡伸輔</div>
         <div class="member-card-name-en">Shinsuke Kamioka</div>
       </div>
+      <div class="member-card" onclick="showMemberDetail('nojiri')">
+        <div class="member-card-photo-wrap"><img class="member-card-photo" src="nojiri.webp" alt="野尻雄太" /></div>
+        <div class="member-card-role-ja">アートディレクター</div>
+        <div class="member-card-role-en">Art Director / UI·UX / 3DCG</div>
+        <div class="member-card-name">野尻雄太</div>
+        <div class="member-card-name-en">Yuta Nojiri</div>
+      </div>
     </div>
   </main>
   <footer>© 2026 Kemono Inc.</footer>
@@ -487,6 +481,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     note: `<svg viewBox="0 0 24 24"><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 2v14h14V5H5zm2 3h10v1.5H7V8zm0 3.5h10V13H7v-1.5zm0 3.5h7v1.5H7V15z"/></svg>`,
     facebook: `<svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`,
     linkedin: `<svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`,
+    website: `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`,
   };
 
   /* =========================================================
@@ -529,7 +524,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       roleJa: '代表取締役', roleEn: 'CEO · Creative Director',
       intro: '動物が好きすぎて、会社名を「けもの」にしました。',
       biography: '武蔵野美術大学卒業。最終学歴吉本NSC中退。プロダクション、クリエイティブエージェンシー、総合広告代理店での経験を背景に、ものづくりから統合コミュニケーション設計、新規事業開発までを一貫して担当。デジタルを軸に、オンライン／オフラインを横断したコミュニケーション設計を強みとする。',
-      awards: 'テクニカルディレクター協会所属。上級ウェブ解析士、食品衛生責任者。ゾウ使い免許保持。\nADFEST、釜山国際広告賞、BOVA、販促コンペ、講談社メディアアワード等を受賞。',
+      awards: '上級ウェブ解析士、食品衛生責任者。ゾウ使い免許保持。\nADFEST、釜山国際広告賞、BOVA、販促コンペ、講談社メディアアワード等を受賞。',
     },
     tomizu: {
       photo: 'ikkan.jpg',
@@ -545,6 +540,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       roleJa: 'フォトグラファー', roleEn: 'Photographer',
       intro: '',
       biography: '上智大学卒業。デザイン会社撮影部を経て、独立。広告、雑誌、ファッションカタログ、CDジャケットなどを中心に活動。世界50カ国以上を訪れ、海外での撮影も多数ある。国連とUniqloの共同プロジェクトでは、ヨルダン、ウガンダ、キリギスなどの難民キャンプでの撮影を行うなど幅広い活動をしている。',
+    },
+    nojiri: {
+      photo: 'nojiri.webp',
+      nameJa: '野尻雄太', nameEn: 'Yuta Nojiri',
+      roleJa: 'アートディレクター', roleEn: 'Art Director / UI·UX / 3DCG / Graphic Designer',
+      intro: 'インターネットを2D・3Dのデジタル空間として捉えウェブサイトを提供する。現実世界の空間デザイン論、VI/CI、ゲーム、UI/UXを融合したクリエイティビティで、依頼主の商品・サービスから派生した新しい世界を造り上げ、一貫性のあるインタラクティブ空間を演出します。',
+      biography: '1982年、東京都生まれ。2006年、武蔵野美術大学 空間演出デザイン学科卒業。',
+      awardList: [
+        { name: 'Adobe AppBox Awards', prize: 'Grand Prize' },
+        { name: 'NIKKEI BP — Android Application Award', prize: 'NFC Prize' },
+        { name: 'S5-Style', prize: 'Excellent website made in Japan' },
+        { name: 'ACC TOKYO CREATIVITY AWARDS', prize: 'Marketing Effectiveness — Grand Prix' },
+        { name: 'Spikes Asia', prize: 'Gold (PR), Silver (Integrated), Bronze (Brand Experience & Activation, PR)' },
+        { name: 'Cannes Lions', prize: 'Bronze (Media Lions)' },
+        { name: 'New York Festivals Advertising Award', prize: 'Third Prize (Public Relations)' },
+        { name: 'ADFEST', prize: 'Lotus Roots, Gold (Brand Experience & Engagement, Direct ×2), Silver (Media)' },
+        { name: 'SKIP Creative Human Award', prize: 'Excellence Award' },
+      ],
     },
   };
 
@@ -657,22 +670,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function showMemberDetail(key) {
     const m = members[key];
     if (!m) return;
+
+    // SNS links
     let snsHtml = '';
     if (m.sns) {
-      const order = ['instagram', 'x', 'note', 'facebook', 'linkedin'];
-      const links = order.filter(k => m.sns[k]).map(k => `<a href="${m.sns[k]}" target="_blank" rel="noopener" aria-label="${k}">${SNS_ICONS[k]}</a>`);
+      const order = ['instagram', 'x', 'note', 'facebook', 'linkedin', 'website'];
+      const links = order.filter(k => m.sns[k]).map(k =>
+        `<a href="${m.sns[k]}" target="_blank" rel="noopener" aria-label="${k}">${SNS_ICONS[k]}</a>`
+      );
       if (links.length) snsHtml = `<div class="member-detail-sns">${links.join('')}</div>`;
     }
-    const awardsHtml = m.awards ? `<div class="member-detail-bio-awards">${m.awards.replace(/\n/g, '<br>')}</div>` : '';
+
+    // Intro section
     const introSection = m.intro ? `
       <div class="member-detail-section" id="md-intro">
         <div class="member-detail-section-label">Introduction</div>
         <div class="member-detail-intro">${m.intro}</div>
       </div>` : '';
-    let worksHtml = '';
-    if (m.works && m.works.length) {
-      worksHtml = `<div class="member-detail-section" id="md-works"><div class="member-detail-section-label">Works</div><div class="member-detail-bio">${m.works.join('<br>')}</div></div>`;
+
+    // Awards: awardList (array) → table; awards (string) → legacy text
+    let awardsSection = '';
+    if (m.awardList && m.awardList.length) {
+      const rows = m.awardList.map(a =>
+        `<li class="award-item"><span class="award-name">${a.name}</span><span class="award-prize">${a.prize}</span></li>`
+      ).join('');
+      awardsSection = `
+        <div class="member-detail-section" id="md-awards">
+          <div class="member-detail-section-label">Award</div>
+          <ul class="award-list">${rows}</ul>
+        </div>`;
+    } else if (typeof m.awards === 'string') {
+      awardsSection = `
+        <div class="member-detail-section" id="md-awards">
+          <div class="member-detail-bio-awards">${m.awards.replace(/\n/g, '<br>')}</div>
+        </div>`;
     }
+
+    // Works
+    const worksSection = (m.works && m.works.length) ? `
+      <div class="member-detail-section" id="md-works">
+        <div class="member-detail-section-label">Works</div>
+        <div class="member-detail-bio">${m.works.join('<br>')}</div>
+      </div>` : '';
+
     document.getElementById('member-detail-content').innerHTML = `
       <div class="member-detail-back" id="md-back" onclick="showPage('member')">Member へ戻る</div>
       <div class="member-detail-header" id="md-header">
@@ -688,15 +728,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       ${introSection}
       <div class="member-detail-section" id="md-bio">
         <div class="member-detail-section-label">Biography</div>
-        <div class="member-detail-bio">${m.biography}${awardsHtml}</div>
+        <div class="member-detail-bio">${m.biography}</div>
       </div>
-      ${worksHtml}
+      ${awardsSection}
+      ${worksSection}
     `;
+
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-member-detail').classList.add('active');
     setTimeout(() => document.getElementById('md-back').classList.add('visible'), 100);
     setTimeout(() => document.getElementById('md-header').classList.add('visible'), 220);
-    ['md-intro', 'md-bio', 'md-works'].forEach((id, i) => {
+    ['md-intro', 'md-bio', 'md-awards', 'md-works'].forEach((id, i) => {
       const el = document.getElementById(id);
       if (el) setTimeout(() => el.classList.add('visible'), 380 + i * 180);
     });
