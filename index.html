@@ -231,8 +231,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .work-detail-body { font-size: clamp(0.82rem, 3.2vw, 0.93rem); line-height: 2.2; color: #111; }
   .work-detail-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
   @media (max-width: 500px) { .work-detail-gallery { grid-template-columns: 1fr; } }
-  .work-detail-gallery img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
-  .work-detail-gallery img.full { grid-column: 1 / -1; aspect-ratio: 16/9; }
+  .work-detail-gallery img,
+  .work-detail-gallery video { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+  .work-detail-gallery img.full,
+  .work-detail-gallery video.full { grid-column: 1 / -1; aspect-ratio: 16/9; object-fit: contain; background: #000; }
 
   /* FORMS */
   .form-wrap, .work-form-wrap { display: flex; flex-direction: column; gap: 1.8rem; max-width: 520px; }
@@ -404,6 +406,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="works-divider" id="works-divider" aria-hidden="true"></div>
     <div class="works-list" id="works-list" aria-label="作品一覧">
+
+      <article class="work-item" onclick="showWorkDetail('nikkeisha')" role="button" tabindex="0" aria-label="NIKKEISHA RECRUIT SITE - 日本経済社の制作実績を見る">
+        <div class="work-item-photo-wrap">
+          <img class="work-item-photo" src="nikkei/04.webp" alt="日本経済社 新卒採用サイト NIKKEISHA RECRUIT SITE - 無重力コンセプトの宇宙船内バーチャル空間" width="440" height="275" loading="lazy" />
+        </div>
+        <div class="work-item-meta">
+          <p class="work-item-client">NIHON KEIZAISHA</p>
+          <h3 class="work-item-title">NIKKEISHA RECRUIT SITE</h3>
+          <p class="work-item-desc">銀座から赤坂への移転を機にリニューアル。"無重力"をコンセプトに宇宙船内をイメージしたバーチャル空間の新卒採用サイト。</p>
+          <span class="work-item-arrow" aria-hidden="true">View</span>
+        </div>
+      </article>
 
       <article class="work-item" onclick="showWorkDetail('to')" role="button" tabindex="0" aria-label="と、 - 株式会社藤井大丸の制作実績を見る">
         <div class="work-item-photo-wrap">
@@ -600,6 +614,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      WORKS DATA
   ========================================================= */
   const works = {
+    nikkeisha: {
+      mainPhoto: 'nikkei/04.webp', client: 'NIHON KEIZAISHA', title: 'NIKKEISHA RECRUIT SITE', type: 'ArtDirection / 3DCG / Design / HTML CSS JS',
+      period: '2023 – 2026',
+      description: '銀座にある日本経済社（本社）の赤坂移転に伴い、新卒採用サイトをリニューアル。クライアントの社風や自由度の高い仕事環境を表現するため、"無重力"をコンセプトに宇宙船内をイメージしたバーチャル空間を制作しました。メタバースやゲームを想起させるビジュアルやキャラクターで、就活生に世代特有の共感を持ってもらえるようなユーザーエクスペリエンスを図りました。',
+      gallery: [
+        { src: 'nikkei/04.webp', full: true },
+        { src: 'nikkei/mov-01.mp4', type: 'video', full: true },
+        { src: 'nikkei/01.webp' },
+        { src: 'nikkei/02.webp' },
+        { src: 'nikkei/03.webp' },
+        { src: 'nikkei/05.webp' },
+        { src: 'nikkei/06.webp' },
+        { src: 'nikkei/mov-02.mp4', type: 'video', full: true },
+      ],
+    },
     to: {
       mainPhoto: 'to.jpg', client: '株式会社藤井大丸', title: 'と、', type: 'DTP / Tabloid',
       description: '人と、モノと、藤井大丸をつなぐ、ネットや電子書籍があたり前となった世の中であえて「紙」でつくる藤井大丸のタブロイド紙。店舗のスタッフにファンがついていたり、店舗の枠を越えた交流が深い藤井大丸ならではの文化を汲み取り、ただ買い物するだけでは見れない魅力を紙面で実感してもらえるためのコンテンツ企画、取材撮影、デザインを行う。現在7号まで発刊しており、毎号異なるテーマを設定し、異なる角度からの打ち出しから新たな藤井大丸の表情を映す。「あのページに出てましたよね」とお客さん自ら声をかけたくなるような、コミュニケーションのきっかけになることを願う。',
@@ -719,16 +748,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   ========================================================= */
   function showWorkDetail(key) {
     const w = works[key]; if (!w) return;
-    const galleryImgs = w.gallery.map((src, i) =>
-      `<img src="${src}" alt="${w.client} ${w.title} - ギャラリー${i+1}" ${i === 0 ? 'class="full"' : ''} loading="lazy" width="800" height="500" />`
-    ).join('');
+    const galleryImgs = w.gallery.map((item, i) => {
+      const src  = typeof item === 'string' ? item : item.src;
+      const type = typeof item === 'object' ? item.type : null;
+      const full = typeof item === 'object' ? item.full : (i === 0);
+      const cls  = full ? 'class="full"' : '';
+      if (type === 'video') {
+        return `<video ${cls} src="${src}" controls muted playsinline preload="metadata"></video>`;
+      }
+      return `<img ${cls} src="${src}" alt="${w.client} ${w.title} - ギャラリー${i+1}" loading="lazy" width="800" height="500" />`;
+    }).join('');
     document.getElementById('work-detail-content').innerHTML = `
       <div class="work-detail-back" id="wd-back" onclick="showPage('works')" role="button" tabindex="0" aria-label="実績一覧に戻る">Works へ戻る</div>
       <img class="work-detail-hero" id="wd-hero" src="${w.mainPhoto}" alt="${w.client} ${w.title} - ${w.type}" width="820" height="461" />
       <header class="work-detail-header" id="wd-header">
         <p class="work-detail-client">${w.client}</p>
         <h2 class="work-detail-title">${w.title}</h2>
-        <p class="work-detail-type">${w.type}</p>
+        <p class="work-detail-type">${w.type}${w.period ? ' &ensp;·&ensp; ' + w.period : ''}</p>
       </header>
       <section class="work-detail-section" id="wd-desc">
         <h3 class="work-detail-section-label">Overview</h3>
